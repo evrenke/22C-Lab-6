@@ -1,3 +1,14 @@
+/*
+	Author: Evren Keskin
+
+	Version: 12/01/2018
+
+	Description:
+		This is a generalized menu object
+		that can take inputs of any specification
+		and allow an easy usage of list-based menus to the user
+*/
+
 #pragma once
 #include <iostream>
 #include <string>
@@ -25,6 +36,7 @@ public:
 	char takeCharInput();
 	std::string takeStringInput();
 	int printOptionsList();
+	void pause();
 };
 
 int Menu::takeRangedIntInput(int min, int max)
@@ -125,4 +137,11 @@ int Menu::printOptionsList()
 		std::cout << (optionsIndex + 1) << ")" << options[optionsIndex] << std::endl;
 	}
 	return takeRangedIntInput(1, optionsIndex);
+}
+
+void Menu::pause()
+{
+	std::cout << "Press any key to continue..." << std::endl;
+	std::cin.get();
+	system("CLS");
 }

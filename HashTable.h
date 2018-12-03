@@ -112,6 +112,7 @@ public:
 	bool remove(const K &key)
 	{
 		unsigned long hashValue = hashFunc(key);
+		std::cout << hashValue << std::endl;
 		HashNode<K, V> *entry = table[hashValue];
 		int quadProbe = 0;
 		int hashIndex = hashValue;
@@ -119,7 +120,7 @@ public:
 		while (entry != nullptr && entry->getKey() != key)
 		{
 			quadProbe++;
-			hashIndex = (hashValue + quad * quad) % tableSize;
+			hashIndex = (hashValue + quadProbe * quadProbe) % tableSize;
 			entry = table[hashIndex];
 		}
 
@@ -137,6 +138,14 @@ public:
 	double getLoadFactor()
 	{
 		return ((double)filledSize) / tableSize;
+	}
+	int getTableSize()
+	{
+		return tableSize;
+	}
+	int getUsedSize()
+	{
+		return filledSize;
 	}
 	void extendTable()
 	{

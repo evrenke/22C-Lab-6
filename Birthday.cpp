@@ -16,7 +16,7 @@ bool Birthday::operator==(const Birthday  &other) const
 }
 bool Birthday::operator!=(const Birthday  &other) const
 {
-	return (year != other.year && month != other.month && day != other.day);
+	return (year != other.year || month != other.month || day != other.day);
 }
 bool Birthday::operator<=(const Birthday  &other) const
 {

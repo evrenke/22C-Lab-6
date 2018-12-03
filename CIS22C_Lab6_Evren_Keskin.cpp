@@ -45,7 +45,8 @@ int main()
 	Birthday birthday;
 
 	inputFile.open("bst_testfile.txt");
-	while (inputFile)
+	int loaded = 0;
+	while (inputFile && loaded < numData)
 	{
 		if (inputFile.eof()) break;
 		getline(inputFile, name, '\n');
@@ -55,6 +56,7 @@ int main()
 
 		numOfCollisions += people.put(birthday, newNamePerson);
 		newNamePerson.~Person();
+		loaded++;
 	}
 	inputFile.close();
 
@@ -72,7 +74,7 @@ int main()
 	while (answer != optionsLength)
 	{
 		std::cout << "Hashtable has been made " << std::endl;
-		std::cout << "Data Items :" << numData << std::endl;
+		std::cout << "Data Items :" << people.getUsedSize() << std::endl;
 		std::cout << "Collisions :" << numOfCollisions << std::endl;
 		std::cout << "Load factor:" << people.getLoadFactor() << std::endl;
 		answer = birthdaySearch.printOptionsList();
@@ -105,7 +107,7 @@ int main()
 			}
 			else
 			{
-				std::cout << "Your key was unable to find anyone in the hashtable" << std::endl;
+				std::cout << "Invalid key. Unable to find anyone in the hashtable" << std::endl;
 			}
 			birthdaySearch.pause();
 			break;

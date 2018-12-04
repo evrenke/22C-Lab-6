@@ -1,7 +1,7 @@
 /*
 	Author: Evren Keskin
 
-	Version: 12/01/2018
+	Version: 12/03/2018
 
 	Description:
 		This is a generalized menu object
@@ -21,7 +21,8 @@ private:
 public:
 	Menu()
 	{
-		options = new std::string{ "DO NOT USE"};
+		std::string choices[] = { "DO NOT USE"};
+		options = choices;
 		length = 0;
 	}
 	Menu(std::string opt[], int len)
@@ -51,13 +52,14 @@ int Menu::takeRangedIntInput(int min, int max)
 		std::getline(std::cin, input);
 		try {
 			chosen = std::stoi(input);
-			properNumber = true;
+			if (chosen >= min && chosen <= max)
+				properNumber = true;
 		}
 		catch (...)
 		{
 			properNumber = false;
 		}
-	} while (!properNumber && (chosen <= min || chosen > max));
+	} while (!properNumber);
 	system("CLS");
 	return chosen;
 }
@@ -142,6 +144,7 @@ int Menu::printOptionsList()
 void Menu::pause()
 {
 	std::cout << "Press any key to continue..." << std::endl;
-	std::cin.get();
+	std::string waste = "";
+	std::getline(std::cin, waste);
 	system("CLS");
 }
